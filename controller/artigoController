@@ -1,0 +1,82 @@
+const Artigo = require('../models/Artigo');
+
+const AWS = require('aws-sdk');
+const s3 = new AWS.S3({
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    region: process.env.AWS_REGION
+});
+
+exports.criarArtigo = async (req, res) => {
+    try {
+        // Dados do corpo da requisição (exceto o arquivo)
+        const { titulo, autores, palavrasChave, resumo, areaTematica, autor } = req.body;
+
+
+        // Criando o artigo com os dados do corpo e o caminho do arquivo no S3
+        const novoArtigo = new Artigo({
+            titulo,
+            autores,
+            palavrasChave: palavrasChave || [],
+            resumo,
+            areaTematica,
+            autor,
+            caminhoPDF: '.'
+        });
+
+        await novoArtigo.save();
+
+        res.status(201).json(novoArtigo);
+
+    } catch (err) {
+        res.status(500).json({ erro: 'Erro ao criar artigo.', detalhes: err.message });
+    }
+};
+
+
+exports.uploadArtigo = async (req, res) => {
+
+
+
+    const file = req.file;
+
+    if (!file) return res.status(400).json({ error: 'Nenhum arquivo enviado.' });
+
+    const key = Date.now() + '-' + file.originalname;
+
+    const params = {
+        Bucket: process.env.S3_BUCKET,
+        Key: key,
+        Body: file.buffer,
+        ContentType: file.mimetype,
+    };
+
+    try {
+        await s3.upload(params).promise();
+
+        const signedUrl = s3.getSignedUrl('getObject', {
+            Bucket: process.env.S3_BUCKET,
+            Key: key,
+            Expires: 9999 // segundos (1 hora)
+        });
+
+        const artigo = await Artigo.findById( req.params.id );
+
+        artigo.caminhoPDF = signedUrl;
+        
+        await artigo.save();
+
+
+
+        res.status(200).json({
+            message: 'Upload realizado com sucesso!',
+            fileUrl: signedUrl
+        });
+
+    } catch (error) {
+        console.error('Erro ao enviar para o S3:', error);
+        res.status(500).json({ error: 'Erro no upload.' });
+
+    }
+
+};
