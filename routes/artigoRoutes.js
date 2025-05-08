@@ -29,7 +29,7 @@ router.post('/update/:id', upload.single('file'), artigoController.uploadArtigo)
  * GET/
  * ARQUIVOS POR AUTOR
  */
-router.get('/:idUsuario', artigoController.filtrarPorAutor);
+router.get('autor/:idUsuario', artigoController.filtrarPorAutor);
 
 /**
  * DELETE/
