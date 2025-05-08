@@ -8,8 +8,11 @@ const usuarioController = require('../controller/usuarioController');
  */
 router.post('/', usuarioController.criarUsuario);
 
-
-
+/**
+ * POST/
+ * LOGIN
+ */
+router.post('/login', usuarioController.loginUsuario)
 
 
 module.exports = router;

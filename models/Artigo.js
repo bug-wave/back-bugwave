@@ -13,8 +13,8 @@ const artigoSchema = new Schema({
   avaliacoes: [{ type: Schema.Types.ObjectId, ref: 'Avalicao'}],
   status: { 
     type: String,
-    enum: ['EM_AVALIACAO', 'APROVADO', 'REPROVADO', 'REVISAO_SOLICITADA'],
-    default: 'EM_AVALIACAO'
+    enum: ['EM_CONFIRMACAO, EM_AVALIACAO', 'APROVADO', 'REPROVADO', 'REVISAO_SOLICITADA'],
+    default: 'EM_CONFIRMACAO'
   }
 }, {
   timestamps: true
