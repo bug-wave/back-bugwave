@@ -82,9 +82,9 @@ exports.excluirComentario = async (req, res) => {
 
 exports.buscarPorIdComentario = async (req, res) => {
     try {
-        const { idComentario } = req.params;
+        const { comentarioId } = req.params;
     
-        const comentario = await Comentario.findById(idComentario).populate('autor', 'nome email');
+        const comentario = await Comentario.findById(comentarioId).populate('autor', 'nome email');
         if (!comentario) {
           return res.status(404).json({ erro: 'Comentário não encontrado.' });
         }
