@@ -12,6 +12,7 @@ const MongoStore = require('connect-mongo');
 const usuarioRoutes = require('./routes/usuarioRoutes');
 const eventoRoutes = require('./routes/eventoRoutes');
 const artigoRoutes = require('./routes/artigoRoutes');
+const comentarioRoutes = require('./routes/comentarioRoutes');
 
 const connectDB = require('./config/db');
 
@@ -31,6 +32,7 @@ app.use(methodOverride('_method'));
 app.use('/usuario', usuarioRoutes);
 app.use('/evento', eventoRoutes);
 app.use('/artigo', artigoRoutes);
+app.use('/comentario', comentarioRoutes);
 
 
 app.listen(PORT, ()=> {
