@@ -11,7 +11,7 @@ const artigoSchema = new Schema({
   autor: { type: Schema.Types.ObjectId, ref: 'Usuario', required: true },
   comentarios: [{ type: Schema.Types.ObjectId, ref: 'Comentario'}],
   avaliacoes: [{ type: Schema.Types.ObjectId, ref: 'Avalicao'}],
-  status: {
+  status: { 
     type: String,
     enum: ['EM_AVALIACAO', 'APROVADO', 'REPROVADO', 'REVISAO_SOLICITADA'],
     default: 'EM_AVALIACAO'
