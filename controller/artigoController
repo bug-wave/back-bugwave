@@ -1,5 +1,6 @@
 const Artigo = require('../models/Artigo');
 const Evento = require('../models/Evento');
+const Usuario = require('../models/Usuario')
 
 const AWS = require('aws-sdk');
 const s3 = new AWS.S3({
@@ -87,3 +88,18 @@ exports.uploadArtigo = async (req, res) => {
     }
 
 };
+
+
+exports.filtrarPorAutor = async (req, res) => {
+    try {
+      const { idUsuario } = req.params;
+  
+      const artigos = await Artigo.find({ autor: idUsuario });
+  
+      res.status(200).json(artigos);
+    } catch (error) {
+      res.status(500).json({ erro: 'Erro ao buscar artigos por usuário', detalhes: error.message });
+    }
+
+
+  };

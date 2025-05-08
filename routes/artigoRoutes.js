@@ -23,6 +23,13 @@ const upload = multer({ storage: multer.memoryStorage() });
  */
 router.post('/update/:id', upload.single('file'), artigoController.uploadArtigo);
 
+/**
+ * GET/
+ * ARQUIVOS POR AUTOR
+ */
+router.get('/:idUsuario', artigoController.filtrarPorAutor);
+
+
 
 
 module.exports = router;

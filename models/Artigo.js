@@ -10,7 +10,7 @@ const artigoSchema = new Schema({
   caminhoPDF: { type: String, required: true},
   autor: { type: Schema.Types.ObjectId, ref: 'Usuario', required: true },
   comentarios: [{ type: Schema.Types.ObjectId, ref: 'Comentario'}],
-  avaliacoes: [{ type: Schema.Types.ObjectId, ref: 'Avalicao'}],
+  avaliacoes: [{ type: Schema.Types.ObjectId, ref: 'Avaliacao'}],
   status: { 
     type: String,
     enum: ['EM_CONFIRMACAO', 'EM_AVALIACAO', 'APROVADO', 'REPROVADO', 'REVISAO_SOLICITADA'],
