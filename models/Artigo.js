@@ -15,8 +15,9 @@ const artigoSchema = new Schema({
     type: String,
     enum: ['EM_CONFIRMACAO', 'EM_AVALIACAO', 'APROVADO', 'REPROVADO', 'REVISAO_SOLICITADA'],
     default: 'EM_CONFIRMACAO'
-  }
-}, {
+  },
+  bannerBase64: { type: String }
+},  {
   timestamps: true
 });
 

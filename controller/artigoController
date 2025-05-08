@@ -22,7 +22,8 @@ exports.criarArtigo = async (req, res) => {
             resumo,
             areaTematica,
             autor,
-            caminhoPDF: '.'
+            caminhoPDF: '.',
+            bannerBase64
         });
 
         
