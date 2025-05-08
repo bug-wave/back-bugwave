@@ -14,8 +14,7 @@ exports.criarUsuario = async (req, res) => {
       return res.status(400).json({ erro: 'E-mail já está em uso.' });
     }
 
-    const saltRounds = 10;
-    const senhaHash = await bcrypt.hash(senha, saltRounds);
+    const senhaHash = await bcrypt.hash(senha, 10);
 
     // Cria e salva o usuário
     const novoUsuario = new Usuario({

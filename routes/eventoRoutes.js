@@ -9,10 +9,10 @@ const eventoController = require("../controller/eventoController");
 router.post("/", eventoController.criarEvento);
 
 /**
- * POST/
+ * GET/
  * CRIAR EVENTO EVENTO
  */
-router.post("/:eventoId", eventoController.buscarPorIdEvento);
+router.get("/:eventoId", eventoController.buscarPorIdEvento);
 
 /**
  * POST/

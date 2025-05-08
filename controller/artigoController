@@ -1,6 +1,8 @@
 const Artigo = require('../models/Artigo');
 const Evento = require('../models/Evento');
 const Usuario = require('../models/Usuario')
+const Comentario = require('../models/Comentario');
+const Avaliacao = require('../models/Avaliacao');
 
 const AWS = require('aws-sdk');
 const s3 = new AWS.S3({
@@ -103,4 +105,45 @@ exports.filtrarPorAutor = async (req, res) => {
     }
 
 
+  };
+
+  exports.deletarArtigo = async (req, res) => {
+    try {
+      const { id } = req.params;
+  
+      const artigo = await Artigo.findById(id);
+      if (!artigo) {
+        return res.status(404).json({ erro: 'Artigo não encontrado.' });
+      }
+  
+      // Remove os comentários e avaliações associados
+      await Comentario.deleteMany({ _id: { $in: artigo.comentarios } });
+      await Avaliacao.deleteMany({ _id: { $in: artigo.avaliacoes } });
+  
+      await artigo.deleteOne();
+  
+      res.status(200).json({ mensagem: 'Artigo deletado com sucesso.' });
+    } catch (error) {
+      res.status(500).json({ erro: 'Erro ao deletar artigo.', detalhes: error.message });
+    }
+  };
+  
+
+  exports.buscarPorIdArtigo = async (req, res) => {
+    try {
+      const { artigoId } = req.params;
+  
+      const artigo = await Artigo.findById(artigoId)
+        .populate('autor', 'nome email') // popula os dados do autor
+        .populate('comentarios')         // popula os comentários
+        .populate('avaliacoes');         // popula as avaliações
+  
+      if (!artigo) {
+        return res.status(404).json({ erro: 'Artigo não encontrado.' });
+      }
+  
+      res.status(200).json(artigo);
+    } catch (error) {
+      res.status(500).json({ erro: 'Erro ao buscar artigo.', detalhes: error.message });
+    }
   };
