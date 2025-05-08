@@ -88,7 +88,7 @@ exports.buscarPorIdEvento = async (req, res) => {
   try {
     const { eventoId } = req.params;
 
-    const evento = await Evento.findById(idEvento);
+    const evento = await Evento.findById(eventoId);
 
     console.log("Buscando evento por ID...", evento.artigos);
     if (!evento) {
