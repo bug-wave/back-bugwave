@@ -15,5 +15,11 @@ router.post('/', eventoController.criarEvento);
 router.delete('/:id', eventoController.deletarEvento);
 
 
+/**
+ * GET/
+ * LISTAR EVENTOS
+ */
+router.get('/ativos', eventoController.listarEventosAtivos);
+
 
 module.exports = router;
