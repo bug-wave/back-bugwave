@@ -79,3 +79,18 @@ exports.excluirComentario = async (req, res) => {
     res.status(500).json({ erro: 'Erro ao excluir comentário', detalhes: error.message });
   }
 };
+
+exports.buscarPorIdComentario = async (req, res) => {
+    try {
+        const { idComentario } = req.params;
+    
+        const comentario = await Comentario.findById(idComentario).populate('autor', 'nome email');
+        if (!comentario) {
+          return res.status(404).json({ erro: 'Comentário não encontrado.' });
+        }
+    
+        res.status(200).json(comentario);
+      } catch (error) {
+        res.status(500).json({ erro: 'Erro ao buscar comentário.', detalhes: error.message });
+      }
+};

@@ -22,6 +22,12 @@ router.post('/editar', comentarioController.editarComentario);
  */
 router.delete('/excluir/:idComentario', comentarioController.excluirComentario);
 
+/**
+ * GET/
+ * PROCURAR POR ID COMENTARIO
+ */
+
+router.get('/:comentarioId', comentarioController.buscarPorIdComentario);
 
 
 module.exports = router;

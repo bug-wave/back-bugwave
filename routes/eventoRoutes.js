@@ -10,7 +10,7 @@ router.post("/", eventoController.criarEvento);
 
 /**
  * GET/
- * CRIAR EVENTO EVENTO
+ * BUSCAR EVENTO POR ID
  */
 router.get("/:eventoId", eventoController.buscarPorIdEvento);
 

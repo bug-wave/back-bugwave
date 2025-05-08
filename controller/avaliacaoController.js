@@ -83,3 +83,18 @@ exports.deletarAvaliacao = async (req, res) => {
       res.status(500).json({ erro: 'Erro ao editar avaliação', detalhes: error.message });
     }
   };
+
+  exports.buscarPorIdAvaliacao = async (req, res) => {
+    try {
+        const { idAvaliacao } = req.params;
+    
+        const avaliacao = await Avaliacao.findById(idAvaliacao).populate('avaliador', 'nome email');
+        if (!avaliacao) {
+          return res.status(404).json({ erro: 'Avaliação não encontrada.' });
+        }
+    
+        res.status(200).json(avaliacao);
+      } catch (error) {
+        res.status(500).json({ erro: 'Erro ao buscar avaliação.', detalhes: error.message });
+      }
+  };
