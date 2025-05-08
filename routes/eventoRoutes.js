@@ -10,6 +10,12 @@ router.post("/", eventoController.criarEvento);
 
 /**
  * GET/
+ * LISTAR EVENTOS
+ */
+router.get("/ativos", eventoController.listarEventosAtivos);
+
+/**
+ * GET/
  * BUSCAR EVENTO POR ID
  */
 router.get("/:eventoId", eventoController.buscarPorIdEvento);
@@ -20,10 +26,6 @@ router.get("/:eventoId", eventoController.buscarPorIdEvento);
  */
 router.delete("/:id", eventoController.deletarEvento);
 
-/**
- * GET/
- * LISTAR EVENTOS
- */
-router.get("/ativos", eventoController.listarEventosAtivos);
+
 
 module.exports = router;

@@ -133,10 +133,7 @@ exports.filtrarPorAutor = async (req, res) => {
     try {
       const { artigoId } = req.params;
   
-      const artigo = await Artigo.findById(artigoId)
-        .populate('autor', 'nome email') // popula os dados do autor
-        .populate('comentarios')         // popula os comentários
-        .populate('avaliacoes');         // popula as avaliações
+      const artigo = await Artigo.findById(artigoId);
   
       if (!artigo) {
         return res.status(404).json({ erro: 'Artigo não encontrado.' });

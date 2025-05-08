@@ -22,4 +22,11 @@ router.delete('/excluir/:idAvaliacao', avaliacaoController.deletarAvaliacao);
 
 router.put('/editar/:idAvaliacao', avaliacaoController.editarAvaliacao);
 
+
+
+/**
+ * GET/
+ * PROCURAR POR ID AVALIÇÃO
+ */
+router.get('/:avaliacaoId', avaliacaoController.buscarPorIdAvaliacao);
 module.exports = router;
