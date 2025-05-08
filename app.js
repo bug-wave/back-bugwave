@@ -13,6 +13,7 @@ const usuarioRoutes = require('./routes/usuarioRoutes');
 const eventoRoutes = require('./routes/eventoRoutes');
 const artigoRoutes = require('./routes/artigoRoutes');
 const comentarioRoutes = require('./routes/comentarioRoutes');
+const avaliacaoRoutes = require('./routes/avaliacaoRoutes');
 
 const connectDB = require('./config/db');
 
@@ -33,6 +34,7 @@ app.use('/usuario', usuarioRoutes);
 app.use('/evento', eventoRoutes);
 app.use('/artigo', artigoRoutes);
 app.use('/comentario', comentarioRoutes);
+app.use('/avaliacao', avaliacaoRoutes);
 
 
 app.listen(PORT, ()=> {
