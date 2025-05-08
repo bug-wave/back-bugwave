@@ -10,7 +10,7 @@ const artigoController = require('../controller/artigoController.js');
  * POST/
  * CRIAR
  */
-router.post('/', artigoController.criarArtigo);
+router.post('/:eventoId', artigoController.criarArtigo);
 
 
 
@@ -29,7 +29,7 @@ router.post('/update/:id', upload.single('file'), artigoController.uploadArtigo)
  * GET/
  * ARQUIVOS POR AUTOR
  */
-router.get('autor/:idUsuario', artigoController.filtrarPorAutor);
+router.get('/autor/:idUsuario', artigoController.filtrarPorAutor);
 
 /**
  * DELETE/

@@ -13,8 +13,8 @@ const s3 = new AWS.S3({
 
 exports.criarArtigo = async (req, res) => {
     try {
-        // Dados do corpo da requisição (exceto o arquivo)
-        const { titulo, autores, palavrasChave, resumo, areaTematica, autor, idEvento } = req.body;
+        const { eventoId } = req.params;
+        const { titulo, autores, palavrasChave, resumo, areaTematica, autor } = req.body;
 
         // Criando o artigo com os dados do corpo e o caminho do arquivo no S3
         const novoArtigo = new Artigo({
@@ -25,12 +25,11 @@ exports.criarArtigo = async (req, res) => {
             areaTematica,
             autor,
             caminhoPDF: '.',
-            bannerBase64
         });
 
         
 
-        const evento = await Evento.findById(idEvento);
+        const evento = await Evento.findById(eventoId);
         
         evento.artigos = evento.artigo == undefined ? [novoArtigo] : evento.artigo.push(novoArtigo);
         
