@@ -64,3 +64,16 @@ AWS_SECRET_ACCESS_KEY=sua_aws_secret_key
 AWS_BUCKET_NAME=nome_do_seu_bucket
 AWS_REGION=regiao_do_bucket
 ```
+
+Após instalar as dependências do backend, execute o servidor de desenvolvimento.
+
+```bash
+npm run dev
+# ou
+yarn dev
+# ou
+pnpm dev
+# ou
+bun dev
+```
+
